@@ -1,10 +1,15 @@
 using Aslanta.Billing.Web.Components;
+using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
 
+IServiceCollection services = builder.Services;
+
 // Add services to the container.
-builder.Services.AddRazorComponents()
+services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+services.AddRadzenComponents();
 
 var app = builder.Build();
 
