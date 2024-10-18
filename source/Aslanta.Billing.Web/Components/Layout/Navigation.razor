@@ -1,0 +1,62 @@
+﻿@rendermode InteractiveServer
+
+<RadzenHeader style="position: static;">
+    <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0">
+        <RadzenSidebarToggle Click="@(() => sidebarExpanded = !sidebarExpanded)" />
+        <RadzenMenu>
+            <RadzenMenuItem Text="General" Icon="home">
+                <RadzenMenuItem Text="Orders" Path="buttons" Icon="text_snippet"></RadzenMenuItem>
+                <RadzenMenuItem Text="Tests" Path="menu" Icon="labs"></RadzenMenuItem>
+                <RadzenMenuItem Text="Patients" Icon="person"></RadzenMenuItem>
+            </RadzenMenuItem>
+            <RadzenMenuItem Text="Insurance" Icon="id_card">
+                <RadzenMenuItem Text="Orders" Path="buttons" Icon="text_snippet"></RadzenMenuItem>
+                <RadzenMenuItem Text="Create Invoice" Path="" Icon="request_page"></RadzenMenuItem>
+                <RadzenMenuItem Text="Post Payment" Path="textbox" Icon="payments"></RadzenMenuItem>
+                <RadzenMenuItem Text="Price List" Path="textarea" Icon="list"></RadzenMenuItem>
+                <RadzenMenuItem Text="Transactions" Path="textarea" Icon="search"></RadzenMenuItem>
+                <hr class="separator" />
+                <RadzenMenuItem Text="Reports" Path="textarea" Icon="assignment"></RadzenMenuItem>
+                <RadzenMenuItem Text="Dashboards" Path="textarea" Icon="bar_chart_4_bars"></RadzenMenuItem>
+                <hr class="separator" />
+                <RadzenMenuItem Text="CPT Codes" Path="textarea" Icon="folder_managed"></RadzenMenuItem>
+                <RadzenMenuItem Text="ICD Codes" Path="textarea" Icon="diagnosis"></RadzenMenuItem>
+                <RadzenMenuItem Text="Payers" Path="textarea" Icon="medical_information"></RadzenMenuItem>
+                <RadzenMenuItem Text="Providers" Path="textarea" Icon="stethoscope"></RadzenMenuItem>
+            </RadzenMenuItem>
+            <RadzenMenuItem Text="Client" Icon="home_health">
+                <RadzenMenuItem Text="Create Invoice" Path="checkbox" Icon="request_page"></RadzenMenuItem>
+                <RadzenMenuItem Text="Post Payment" Path="textbox" Icon="payments"></RadzenMenuItem>
+                <RadzenMenuItem Text="Price List" Path="textarea" Icon="list"></RadzenMenuItem>
+                <RadzenMenuItem Text="Transactions" Path="textarea" Icon="search"></RadzenMenuItem>
+                <RadzenMenuItem Text="Reports" Path="textarea" Icon="assignment"></RadzenMenuItem>
+            </RadzenMenuItem>
+            <RadzenMenuItem Text="Patient" Icon="contact_mail">
+                <RadzenMenuItem Text="Create Invoice" Path="checkbox" Icon="request_page"></RadzenMenuItem>
+                <RadzenMenuItem Text="Post Payment" Path="textbox" Icon="payments"></RadzenMenuItem>
+                <RadzenMenuItem Text="Price List" Path="textarea" Icon="list"></RadzenMenuItem>
+                <RadzenMenuItem Text="Transactions" Path="textarea" Icon="search"></RadzenMenuItem>
+                <RadzenMenuItem Text="Reports" Path="textarea" Icon="assignment"></RadzenMenuItem>
+            </RadzenMenuItem>
+            <RadzenMenuItem Text="More">
+                <RadzenMenuItem Text="Settings" Icon="settings"></RadzenMenuItem>
+            </RadzenMenuItem>
+        </RadzenMenu>
+    </RadzenStack>
+</RadzenHeader>
+<RadzenSidebar @bind-Expanded="@sidebarExpanded">
+    <RadzenPanelMenu>
+        @* <RadzenPanelMenuItem Text="Home" Icon="home" /> *@
+    </RadzenPanelMenu>
+</RadzenSidebar>
+
+<style>
+    .separator {
+        border-top: 1px solid #ccc;
+        margin: 0.5rem 0;
+    }
+</style>
+
+@code {
+    bool sidebarExpanded = false;
+}
