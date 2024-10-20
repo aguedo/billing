@@ -21,11 +21,13 @@ public class ItemCollection<T> : IItemCollection<T>
 
     public void Clear()
     {
+        _items.Clear();
+        _selectedItems.Clear();
     }
 
     public bool IsSelected(T item)
     {
-        throw new NotImplementedException();
+        return _selectedItems.Contains(item);
     }
 
     public void Remove(params T[] items)
