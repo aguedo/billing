@@ -21,7 +21,6 @@ public class ItemCollection<T> : IItemCollection<T>
 
     public void Clear()
     {
-        throw new NotImplementedException();
     }
 
     public bool IsSelected(T item)
@@ -31,14 +30,18 @@ public class ItemCollection<T> : IItemCollection<T>
 
     public void Remove(params T[] items)
     {
+        Remove(items.AsEnumerable());
     }
 
     public void Remove(IEnumerable<T> items)
     {
+        _items.ExceptWith(items);
+        _selectedItems.ExceptWith(items);
     }
 
     public void RemoveSelected()
     {
-        throw new NotImplementedException();
+        Remove(_selectedItems);
+        _selectedItems.Clear();
     }
 }
