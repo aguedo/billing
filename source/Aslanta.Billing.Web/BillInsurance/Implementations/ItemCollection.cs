@@ -25,11 +25,6 @@ public class ItemCollection<T> : IItemCollection<T>
         _selectedItems.Clear();
     }
 
-    public bool IsSelected(T item)
-    {
-        return _selectedItems.Contains(item);
-    }
-
     public void Remove(params T[] items)
     {
         Remove(items.AsEnumerable());
@@ -44,6 +39,31 @@ public class ItemCollection<T> : IItemCollection<T>
     public void RemoveSelected()
     {
         Remove(_selectedItems);
+        _selectedItems.Clear();
+    }
+
+    public bool IsSelected(T item)
+    {
+        return _selectedItems.Contains(item);
+    }
+
+    public void Select(T item)
+    {
+        _selectedItems.Add(item);
+    }
+
+    public void Unselect(T item)
+    {
+        _selectedItems.Remove(item);
+    }
+
+    public void SelectAll()
+    {
+        _selectedItems.UnionWith(Items);
+    }
+
+    public void UnselectAll()
+    {
         _selectedItems.Clear();
     }
 }
