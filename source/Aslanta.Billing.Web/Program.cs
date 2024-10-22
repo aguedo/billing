@@ -1,4 +1,7 @@
 using Aslanta.Billing.Web.Components;
+using Aslanta.Billing.Web.BillInsurance;
+using Aslanta.Billing.Web.BillInsurance.Models;
+using Aslanta.Billing.Web.BillInsurance.Implementations;
 using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +13,9 @@ services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 services.AddRadzenComponents();
+
+services.AddScoped<IItemCollection<Order>, ItemCollection<Order>>();
+services.AddScoped<IItemCollection<InvoiceItem>, ItemCollection<InvoiceItem>>();
 
 var app = builder.Build();
 
