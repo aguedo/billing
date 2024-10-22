@@ -15,4 +15,12 @@ public interface IInvoiceCreationState
     void SelectAllOrders();
     void UnselectAllOrders();
     bool IsOrderSelected(Order order);
+
+    IReadOnlyCollection<InvoiceItem> InvoiceItems { get; }
+    IReadOnlyCollection<InvoiceItem> SelectedInvoiceItems { get; }
+    void AddInvoiceItems(params InvoiceItem[] invoiceItems);
+    void AddInvoiceItems(IEnumerable<InvoiceItem> invoiceItems);
+    void RemoveInvoiceItems(params InvoiceItem[] invoiceItems);
+    void RemoveInvoiceItems(IEnumerable<InvoiceItem> invoiceItems);
+    void RemoveSelectedInvoiceItems();
 }
