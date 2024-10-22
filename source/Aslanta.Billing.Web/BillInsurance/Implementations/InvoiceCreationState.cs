@@ -71,4 +71,33 @@ public class InvoiceCreationState : IInvoiceCreationState
         _orderCollection.UnselectAll();
         _invoiceItemCollection.Clear();
     }
+
+    public IReadOnlyCollection<InvoiceItem> InvoiceItems => _invoiceItemCollection.Items;
+
+    public IReadOnlyCollection<InvoiceItem> SelectedInvoiceItems => _invoiceItemCollection.SelectedItems;
+
+    public void AddInvoiceItems(params InvoiceItem[] invoiceItems)
+    {
+        _invoiceItemCollection.Add(invoiceItems);
+    }
+
+    public void AddInvoiceItems(IEnumerable<InvoiceItem> invoiceItems)
+    {
+        _invoiceItemCollection.Add(invoiceItems);
+    }
+
+    public void RemoveInvoiceItems(params InvoiceItem[] invoiceItems)
+    {
+        _invoiceItemCollection.Remove(invoiceItems);
+    }
+
+    public void RemoveInvoiceItems(IEnumerable<InvoiceItem> invoiceItems)
+    {
+        _invoiceItemCollection.Remove(invoiceItems);
+    }
+
+    public void RemoveSelectedInvoiceItems()
+    {
+        _invoiceItemCollection.RemoveSelected();
+    }
 }
