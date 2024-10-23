@@ -3,8 +3,16 @@
 @using Aslanta.Billing.Web.BillInsurance
 @using Aslanta.Billing.Web.BillInsurance.Models
 @inject IInvoiceCreationState InvoiceState
+@inject ContextMenuService ContextMenuService
 
-<PageTitle>Create Invoice</PageTitle>
+<RadzenStack Orientation="Orientation.Horizontal" Gap="0" AlignItems="AlignItems.Center"
+    class="rz-px-4 rz-py-1 rz-border-radius-1" Style="border: var(--rz-grid-cell-border); height: 48px;">
+    <RadzenStack Orientation="Orientation.Horizontal" Gap="4px" JustifyContent="JustifyContent.Start"
+        AlignItems="AlignItems.Center" class="" Style="border: none; width:50%">
+        <RadzenText class="rz-mt-1 rz-mr-2">Missing Info:</RadzenText>
+    </RadzenStack>
+</RadzenStack>
+
 
 @code {
     protected override void OnInitialized()
