@@ -23,4 +23,9 @@ public interface IInvoiceCreationState
     void RemoveInvoiceItems(params InvoiceItem[] invoiceItems);
     void RemoveInvoiceItems(IEnumerable<InvoiceItem> invoiceItems);
     void RemoveSelectedInvoiceItems();
+    void SelectInvoiceItem(InvoiceItem invoiceItem);
+    void UnselectInvoiceItem(InvoiceItem invoiceItem);
+    void SelectAllInvoiceItems();
+    void UnselectAllInvoiceItems();
+    bool IsInvoiceItemSelected(InvoiceItem invoiceItem);
 }

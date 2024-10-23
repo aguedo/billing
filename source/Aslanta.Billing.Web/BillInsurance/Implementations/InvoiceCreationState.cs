@@ -100,4 +100,29 @@ public class InvoiceCreationState : IInvoiceCreationState
     {
         _invoiceItemCollection.RemoveSelected();
     }
+
+    public void SelectInvoiceItem(InvoiceItem invoiceItem)
+    {
+        _invoiceItemCollection.Select(invoiceItem);
+    }
+
+    public void UnselectInvoiceItem(InvoiceItem invoiceItem)
+    {
+        _invoiceItemCollection.Unselect(invoiceItem);
+    }
+
+    public void SelectAllInvoiceItems()
+    {
+        _invoiceItemCollection.SelectAll();
+    }
+
+    public void UnselectAllInvoiceItems()
+    {
+        _invoiceItemCollection.UnselectAll();
+    }
+
+    public bool IsInvoiceItemSelected(InvoiceItem invoiceItem)
+    {
+        return _invoiceItemCollection.IsSelected(invoiceItem);
+    }
 }
