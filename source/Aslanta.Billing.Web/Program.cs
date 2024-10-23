@@ -16,6 +16,7 @@ services.AddRadzenComponents();
 
 services.AddScoped<IItemCollection<Order>, ItemCollection<Order>>();
 services.AddScoped<IItemCollection<InvoiceItem>, ItemCollection<InvoiceItem>>();
+services.AddScoped<IInvoiceCreationState, InvoiceCreationState>();
 
 var app = builder.Build();
 

@@ -1,7 +1,14 @@
 ﻿@page "/"
 @rendermode InteractiveServer
+@using Aslanta.Billing.Web.BillInsurance
+@using Aslanta.Billing.Web.BillInsurance.Models
+@inject IInvoiceCreationState InvoiceState
 
 <PageTitle>Create Invoice</PageTitle>
 
 @code {
+    protected override void OnInitialized()
+    {
+        var orders = InvoiceState.SelectAllOrders;
+    }
 }
