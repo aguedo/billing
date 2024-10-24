@@ -23,10 +23,22 @@
     </RadzenStack>
 </RadzenStack>
 
-
 @code {
     protected override void OnInitialized()
     {
         var orders = InvoiceState.SelectAllOrders;
+    }
+
+    class Layout
+    {
+        public LayoutType LayoutType { get; set; } = LayoutType.DockRight;
+        public string OrderWidth { get; set; } = "calc(40% - 10px)";
+        public string InvoiceItemWidth { get; set; } = "60%";
+    }
+
+    enum LayoutType
+    {
+        DockRight = 1,
+        DockBottom = 2
     }
 }
