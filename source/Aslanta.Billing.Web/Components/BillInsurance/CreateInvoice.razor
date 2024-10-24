@@ -23,6 +23,58 @@
     </RadzenStack>
 </RadzenStack>
 
+<div class="rz-mt-2"
+    style="height: calc(100% - 55px); width: @_layout.OrderWidth; float: left; margin:0; margin-right: 8px;">
+    <RadzenDataGrid style="height: 100%;" @ref="_orderConfig.Grid" TItem="Order" Data=@InvoiceState.Orders
+        @bind-Value=@_orderConfig.Selected AllowFiltering="true" AllowRowSelectOnRowClick="true"
+        AllowColumnResize="true" ColumnWidth="200px" AllowAlternatingRows="true"
+        GridLines="Radzen.DataGridGridLines.Horizontal" FilterMode="FilterMode.Advanced" AllowSorting="true"
+        PageSize="500" Density=@_orderConfig.GridDensity AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left"
+        AllowColumnPicking="true" LogicalFilterOperator="LogicalFilterOperator.And"
+        SelectionMode="DataGridSelectionMode.Multiple" PageSizeOptions="@_orderConfig.PageeSizeOptions"
+        ShowPagingSummary="true" RowSelect="@OnOrderSelect" RowDeselect="@OnOrderDeselect"
+        CellContextMenu="@OnOrderCellContextMenu">
+        <HeaderTemplate>
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center"
+                Wrap="FlexWrap.Wrap">
+                <RadzenText class="rz-mt-2" TextStyle="TextStyle.Body2">
+                    @InvoiceState.SelectedOrders.Count/@InvoiceState.Orders.Count</RadzenText>
+                <RadzenMenu class="options-menu" style="background-color: transparent;">
+                    <RadzenMenuItem Text="Options">
+                        <RadzenMenuItem Text="Remove Selected"></RadzenMenuItem>
+                        <RadzenMenuItem Text="Reload"></RadzenMenuItem>
+                        <RadzenSelectBar style="padding:0 4px;" @bind-Value="@_orderConfig.GridDensity"
+                            TextProperty="Text" ValueProperty="Value"
+                            Data="@(Enum.GetValues(typeof(Density)).Cast<Density>().Select(t => new { Text = $"{t}", Value = t }))"
+                            Size="ButtonSize.ExtraSmall" />
+                    </RadzenMenuItem>
+                </RadzenMenu>
+            </RadzenStack>
+
+        </HeaderTemplate>
+        <Columns>
+            <RadzenDataGridColumn Width="50px" Frozen="true" Sortable="false" Filterable="false">
+                <HeaderTemplate>
+                    <RadzenCheckBox TabIndex="-1" TriState="false" TValue="bool?"
+                        InputAttributes="@(new Dictionary<string,object>(){ { "aria-label", "Select all items" }})"
+                        Value="@(InvoiceState.SelectedOrders.Count > 0)" Change="@OnSelectAllOrdersChanged" />
+                </HeaderTemplate>
+                <Template Context="data">
+                    <RadzenCheckBox TabIndex="-1" TriState="false" Value="@InvoiceState.IsOrderSelected(data)"
+                        InputAttributes="@(new Dictionary<string,object>(){ { "aria-label", "Select item" }})"
+                        TValue="bool" />
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn Property="Code" Title="Code" Width="140px" Frozen="true" />
+            <RadzenDataGridColumn Property="Patient.FirstName" Title="First Name" Width="150px" Frozen="true" />
+            <RadzenDataGridColumn Property="Patient.LastName" Title="Last Name" Width="150px" />
+            <RadzenDataGridColumn Property="CollectionDate" Title="Collection" Width="150px" FormatString="{0:d}" />
+            <RadzenDataGridColumn Property="Patient.DateOfBirth" Title="DOB" Width="150px" FormatString="{0:d}" />
+            <RadzenDataGridColumn Property="Insurance.Payer.Code" Title="Insurance" Width="150px" />
+        </Columns>
+    </RadzenDataGrid>
+</div>
+
 @code {
     private Layout _layout = new Layout();
     private OrderGridConfig _orderConfig = new OrderGridConfig();
@@ -30,6 +82,22 @@
     protected override void OnInitialized()
     {
         var orders = InvoiceState.SelectAllOrders;
+    }
+
+    private void OnOrderSelect(Order order)
+    {
+    }
+
+    private void OnOrderDeselect(Order order)
+    {
+    }
+
+    private void OnSelectAllOrdersChanged(bool? isSelected)
+    {
+    }
+
+    void OnOrderCellContextMenu(DataGridCellMouseEventArgs<Order> args)
+    {
     }
 
     class OrderGridConfig
