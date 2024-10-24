@@ -4,6 +4,7 @@ namespace Aslanta.Billing.Web.BillInsurance;
 
 public interface IInvoiceCreationState
 {
+    IReadOnlyCollection<Order> Orders { get; }
     IReadOnlyCollection<Order> SelectedOrders { get; }
     void AddOrders(params Order[] orders);
     void AddOrders(IEnumerable<Order> orders);
