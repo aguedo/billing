@@ -24,9 +24,20 @@
 </RadzenStack>
 
 @code {
+    private Layout _layout = new Layout();
+    private OrderGridConfig _orderConfig = new OrderGridConfig();
+
     protected override void OnInitialized()
     {
         var orders = InvoiceState.SelectAllOrders;
+    }
+
+    class OrderGridConfig
+    {
+        public IList<Order>? Selected { get; set; }
+        public RadzenDataGrid<Order>? Grid { get; set; }
+        public IEnumerable<int> PageeSizeOptions { get; } = new int[] { 50, 100, 500, 1000, 10000, 100000 };
+        public Density GridDensity { get; set; } = Density.Compact;
     }
 
     class Layout
