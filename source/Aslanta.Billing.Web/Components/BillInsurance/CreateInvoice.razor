@@ -117,6 +117,10 @@
 
     void OnOrderCellContextMenu(DataGridCellMouseEventArgs<Order> args)
     {
+        ContextMenuService.Open(args, [
+        new ContextMenuItem(){ Text = "Edit", Value = 1, Icon = "edit" },
+new ContextMenuItem(){ Text = "Remove", Value = 2, Icon = "remove" }],
+        (e) => { });
     }
 
     class OrderGridConfig
