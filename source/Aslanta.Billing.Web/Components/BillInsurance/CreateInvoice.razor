@@ -78,6 +78,7 @@
 @code {
     private Layout _layout = new Layout();
     private OrderGridConfig _orderConfig = new OrderGridConfig();
+    private InvoiceItemGridConfig _invoiceItemConfig = new InvoiceItemGridConfig();
 
     protected override void OnInitialized()
     {
@@ -86,6 +87,8 @@
 
     private void OnOrderSelect(Order order)
     {
+        InvoiceState.SelectOrder(order);
+        _invoiceItemConfig.Grid?.Reload();
     }
 
     private void OnOrderDeselect(Order order)
