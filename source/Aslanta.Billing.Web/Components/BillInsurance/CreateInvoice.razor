@@ -108,6 +108,18 @@
         public Density GridDensity { get; set; } = Density.Compact;
     }
 
+    class InvoiceItemGridConfig
+    {
+        public IList<InvoiceItem>? Selected { get; set; }
+        public RadzenDataGrid<InvoiceItem>? Grid { get; set; }
+        public Density GridDensity = Density.Compact;
+        public IEnumerable<int> PageSizeOptions { get; set; } = new int[] { 50, 100, 500, 1000, 10000, 100000 };
+        public IRadzenFormComponent? Editor { get; set; }
+        public InvoiceItem? ItemToUpdate { get; set; }
+        public string? ColumnEditing { get; set; }
+        public bool EditorFocused { get; set; }
+    }
+
     class Layout
     {
         public LayoutType LayoutType { get; set; } = LayoutType.DockRight;
