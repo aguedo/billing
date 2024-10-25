@@ -93,6 +93,9 @@
 
     private void OnOrderDeselect(Order order)
     {
+        InvoiceState.UnselectOrder(order);
+        _invoiceItemConfig.Grid?.Reload();
+        _invoiceItemConfig.Selected = InvoiceState.SelectedInvoiceItems.ToList();
     }
 
     private void OnSelectAllOrdersChanged(bool? isSelected)
