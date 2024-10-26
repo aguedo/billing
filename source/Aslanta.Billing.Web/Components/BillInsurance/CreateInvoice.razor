@@ -75,6 +75,42 @@
     </RadzenDataGrid>
 </div>
 
+<div class="rz-mt-2" style="height: calc(100% - 55px); width: @_layout.InvoiceItemWidth; float: left;">
+    <RadzenDataGrid style="height: 100%" @ref="_invoiceItemConfig.Grid" TItem="InvoiceItem"
+        Data="@InvoiceState.InvoiceItems" @bind-Value=@_invoiceItemConfig.Selected AllowFiltering="true"
+        AllowRowSelectOnRowClick="true" AllowColumnResize="true" ColumnWidth="100px" AllowAlternatingRows="true"
+        GridLines="Radzen.DataGridGridLines.Horizontal" FilterMode="FilterMode.Advanced" AllowSorting="true"
+        PageSize="50" Density="@_invoiceItemConfig.GridDensity" AllowPaging="true"
+        PagerHorizontalAlign="HorizontalAlign.Left" AllowColumnPicking="true"
+        LogicalFilterOperator="LogicalFilterOperator.And" SelectionMode="DataGridSelectionMode.Multiple"
+        PageSizeOptions="@_invoiceItemConfig.PageSizeOptions" ShowPagingSummary="true">
+        <HeaderTemplate>
+            <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center"
+                Wrap="FlexWrap.Wrap">
+                <RadzenText class="rz-mt-2" TextStyle="TextStyle.Body2">
+                    @InvoiceState.SelectedInvoiceItems.Count/@InvoiceState.InvoiceItems.Count</RadzenText>
+                <RadzenSelectBar @bind-Value="@_invoiceItemConfig.GridDensity" TextProperty="Text" ValueProperty="Value"
+                    Data="@(Enum.GetValues(typeof(Density)).Cast<Density>().Select(t => new { Text = $"{t}", Value = t }))"
+                    Size="ButtonSize.ExtraSmall" />
+            </RadzenStack>
+        </HeaderTemplate>
+        <Columns>
+            <RadzenDataGridColumn Property="Item.Name" Title="Item Name" Width="180px" Frozen="true" />
+            <RadzenDataGridColumn Property="CptCode.Code" Title="CPT Code" Width="80px" />
+            <RadzenDataGridColumn Property="IcdCode1.Code" Title="Dx1" Width="80px" />
+            <RadzenDataGridColumn Property="IcdCode2.Code" Title="Dx2" Width="80px" />
+            <RadzenDataGridColumn Property="IcdCode3.Code" Title="Dx3" Width="80px" />
+            <RadzenDataGridColumn Property="IcdCode4.Code" Title="Dx4" Width="80px" />
+            <RadzenDataGridColumn Property="Modifier1.Code" Title="M1" Width="80px" />
+            <RadzenDataGridColumn Property="Modifier2.Code" Title="M2" Width="80px" />
+            <RadzenDataGridColumn Property="Modifier3.Code" Title="M3" Width="80px" />
+            <RadzenDataGridColumn Property="Modifier4.Code" Title="M4" Width="80px" />
+            <RadzenDataGridColumn Property="Price" Title="Price" Frozen="true"
+                FrozenPosition="FrozenColumnPosition.Right" />
+        </Columns>
+    </RadzenDataGrid>
+</div>
+
 @code {
     private Layout _layout = new Layout();
     private OrderGridConfig _orderConfig = new OrderGridConfig();
