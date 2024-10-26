@@ -95,6 +95,19 @@
             </RadzenStack>
         </HeaderTemplate>
         <Columns>
+            <RadzenDataGridColumn Width="30px" Frozen="true" Sortable="false" Filterable="false">
+                <HeaderTemplate>
+                    <RadzenCheckBox TabIndex="-1" TriState="false" TValue="bool?"
+                        InputAttributes="@(new Dictionary<string,object>(){ { "aria-label", "Select all items" }})"
+                        Value="@(InvoiceState.SelectedInvoiceItems.Count > 0)"
+                        Change="@OnSelectAllInvoiceItemsChanged" />
+                </HeaderTemplate>
+                <Template Context="data">
+                    <RadzenCheckBox TabIndex="-1" TriState="false" Value="@InvoiceState.IsInvoiceItemSelected(data)"
+                        InputAttributes="@(new Dictionary<string,object>(){ { "aria-label", "Select item" }})"
+                        TValue="bool" />
+                </Template>
+            </RadzenDataGridColumn>
             <RadzenDataGridColumn Property="Item.Name" Title="Item Name" Width="180px" Frozen="true" />
             <RadzenDataGridColumn Property="CptCode.Code" Title="CPT Code" Width="80px" />
             <RadzenDataGridColumn Property="IcdCode1.Code" Title="Dx1" Width="80px" />
@@ -121,6 +134,7 @@
         var orders = InvoiceState.SelectAllOrders;
     }
 
+    #region Orders
     private void OnOrderSelect(Order order)
     {
         InvoiceState.SelectOrder(order);
@@ -158,6 +172,25 @@
 new ContextMenuItem(){ Text = "Remove", Value = 2, Icon = "remove" }],
         (e) => { });
     }
+    #endregion
+
+    #region Invoice Items
+
+    private void OnSelectAllInvoiceItemsChanged(bool? isSelected)
+    {
+        if (isSelected == true)
+        {
+            InvoiceState.SelectAllInvoiceItems();
+            _invoiceItemConfig.Selected = InvoiceState.SelectedInvoiceItems.ToList(); // Needed to later trigger the unselect.
+        }
+        else
+        {
+            InvoiceState.UnselectAllInvoiceItems();
+            _invoiceItemConfig.Selected = null;
+        }
+    }
+
+    #endregion
 
     class OrderGridConfig
     {
