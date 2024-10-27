@@ -21,6 +21,16 @@
             </Items>
         </RadzenCheckBoxList>
     </RadzenStack>
+    <RadzenStack Orientation="Orientation.Horizontal" Gap="8px" JustifyContent="JustifyContent.End"
+        AlignItems="AlignItems.Center" class="" Style="border: none; width:50%">
+        <RadzenSelectBar TValue="LayoutType" @bind-Value="@_layout.LayoutType" Size="ButtonSize.Small">
+            <Items>
+                <RadzenSelectBarItem Icon="dock_to_right" Text="" Value="@LayoutType.DockRight" />
+                <RadzenSelectBarItem Icon="dock_to_bottom" Text="" Value="@LayoutType.DockBottom" />
+            </Items>
+        </RadzenSelectBar>
+        <RadzenButton Text="Create Invoice" ButtonStyle="ButtonStyle.Primary" Variant="Variant.Flat" />
+    </RadzenStack>
 </RadzenStack>
 
 <div class="rz-mt-2"
