@@ -83,7 +83,8 @@
         PageSize="50" Density="@_invoiceItemConfig.GridDensity" AllowPaging="true"
         PagerHorizontalAlign="HorizontalAlign.Left" AllowColumnPicking="true"
         LogicalFilterOperator="LogicalFilterOperator.And" SelectionMode="DataGridSelectionMode.Multiple"
-        PageSizeOptions="@_invoiceItemConfig.PageSizeOptions" ShowPagingSummary="true">
+        PageSizeOptions="@_invoiceItemConfig.PageSizeOptions" ShowPagingSummary="true" RowSelect=@OnInvoiceItemSelect
+        RowDeselect=@OnInvoiceItemDeselect>
         <HeaderTemplate>
             <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center"
                 Wrap="FlexWrap.Wrap">
@@ -188,6 +189,16 @@ new ContextMenuItem(){ Text = "Remove", Value = 2, Icon = "remove" }],
             InvoiceState.UnselectAllInvoiceItems();
             _invoiceItemConfig.Selected = null;
         }
+    }
+
+    private void OnInvoiceItemSelect(InvoiceItem item)
+    {
+        InvoiceState.SelectInvoiceItem(item);
+    }
+
+    private void OnInvoiceItemDeselect(InvoiceItem item)
+    {
+        InvoiceState.UnselectInvoiceItem(item);
     }
 
     #endregion
