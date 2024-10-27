@@ -23,7 +23,8 @@
     </RadzenStack>
     <RadzenStack Orientation="Orientation.Horizontal" Gap="8px" JustifyContent="JustifyContent.End"
         AlignItems="AlignItems.Center" class="" Style="border: none; width:50%">
-        <RadzenSelectBar TValue="LayoutType" @bind-Value="@_layout.LayoutType" Size="ButtonSize.Small">
+        <RadzenSelectBar TValue="LayoutType" @bind-Value="@_layout.LayoutType" Size="ButtonSize.Small"
+            Change="() => OnChangeLayout()">
             <Items>
                 <RadzenSelectBarItem Icon="dock_to_right" Text="" Value="@LayoutType.DockRight" />
                 <RadzenSelectBarItem Icon="dock_to_bottom" Text="" Value="@LayoutType.DockBottom" />
@@ -212,6 +213,20 @@ new ContextMenuItem(){ Text = "Remove", Value = 2, Icon = "remove" }],
     }
 
     #endregion
+
+    private void OnChangeLayout()
+    {
+        if (_layout.LayoutType == LayoutType.DockRight)
+        {
+            _layout.OrderWidth = "calc(40% - 10px)";
+            _layout.InvoiceItemWidth = "60%";
+        }
+        else
+        {
+            _layout.OrderWidth = "100%";
+            _layout.InvoiceItemWidth = "100%";
+        }
+    }
 
     class OrderGridConfig
     {
