@@ -138,6 +138,11 @@
                     <RadzenText
                         Text="@(String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C}", invoiceItem.ActualPrice))" />
                 </Template>
+                <EditTemplate Context="invoiceItem">
+                    <RadzenNumeric @ref="_invoiceItemConfig.Editor" Change="@((decimal args) => Update())"
+                        @bind-Value="invoiceItem.ActualPrice" Style="width:100%"
+                        InputAttributes="@(new Dictionary<string,object>(){ { "aria-label", "Select freight" }})" />
+                </EditTemplate>
             </RadzenDataGridColumn>
         </Columns>
     </RadzenDataGrid>
@@ -245,6 +250,12 @@ new ContextMenuItem(){ Text = "Remove", Value = 2, Icon = "remove" }],
     private bool IsEditing(string columnName, InvoiceItem invoiceItem)
     {
         return _invoiceItemConfig.ColumnEditing == columnName && _invoiceItemConfig.ItemToUpdate == invoiceItem; ;
+    }
+
+    void Update()
+    {
+        _invoiceItemConfig.EditorFocused = false;
+        Reset();
     }
 
     #endregion
