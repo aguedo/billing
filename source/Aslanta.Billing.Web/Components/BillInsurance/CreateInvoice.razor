@@ -95,7 +95,7 @@
         PagerHorizontalAlign="HorizontalAlign.Left" AllowColumnPicking="true"
         LogicalFilterOperator="LogicalFilterOperator.And" SelectionMode="DataGridSelectionMode.Multiple"
         PageSizeOptions="@_invoiceItemConfig.PageSizeOptions" ShowPagingSummary="true" RowSelect=@OnInvoiceItemSelect
-        RowDeselect=@OnInvoiceItemDeselect>
+        RowDeselect=@OnInvoiceItemDeselect CellClick="@OnCellClick">
         <HeaderTemplate>
             <RadzenStack Orientation="Orientation.Horizontal" Gap="0.5rem" AlignItems="AlignItems.Center"
                 Wrap="FlexWrap.Wrap">
@@ -210,6 +210,12 @@ new ContextMenuItem(){ Text = "Remove", Value = 2, Icon = "remove" }],
     private void OnInvoiceItemDeselect(InvoiceItem item)
     {
         InvoiceState.UnselectInvoiceItem(item);
+    }
+
+    private void OnCellClick(DataGridCellMouseEventArgs<InvoiceItem> args)
+    {
+        // This sets which column is currently being edited.
+        _invoiceItemConfig.ColumnEditing = args.Column.Property;
     }
 
     #endregion
