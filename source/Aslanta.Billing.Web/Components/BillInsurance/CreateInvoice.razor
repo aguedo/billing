@@ -216,6 +216,23 @@ new ContextMenuItem(){ Text = "Remove", Value = 2, Icon = "remove" }],
     {
         // This sets which column is currently being edited.
         _invoiceItemConfig.ColumnEditing = args.Column.Property;
+
+        // This sets the Item to be edited.
+        EditRow(args.Data);
+    }
+
+    private void EditRow(InvoiceItem invoiceItem)
+    {
+        Reset();
+
+        //ordersToUpdate.Add(order);
+        _invoiceItemConfig.ItemToUpdate = invoiceItem;
+    }
+
+    private void Reset(InvoiceItem invoiceItem = null)
+    {
+        _invoiceItemConfig.EditorFocused = false;
+        _invoiceItemConfig.ItemToUpdate = null;
     }
 
     #endregion
