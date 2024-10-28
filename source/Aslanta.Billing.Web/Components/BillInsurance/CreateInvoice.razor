@@ -132,6 +132,13 @@
             <RadzenDataGridColumn Property="Modifier4.Code" Title="M4" Width="80px" />
             <RadzenDataGridColumn Property="Price" Title="Price" Frozen="true"
                 FrozenPosition="FrozenColumnPosition.Right" />
+            <RadzenDataGridColumn TItem="InvoiceItem" Property="ActualPrice" Title="Actual Price" Width="100px"
+                Frozen="true" FrozenPosition="FrozenColumnPosition.Right" IsInEditMode="@IsEditing">
+                <Template Context="invoiceItem">
+                    <RadzenText
+                        Text="@(String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C}", invoiceItem.ActualPrice))" />
+                </Template>
+            </RadzenDataGridColumn>
         </Columns>
     </RadzenDataGrid>
 </div>
@@ -233,6 +240,11 @@ new ContextMenuItem(){ Text = "Remove", Value = 2, Icon = "remove" }],
     {
         _invoiceItemConfig.EditorFocused = false;
         _invoiceItemConfig.ItemToUpdate = null;
+    }
+
+    private bool IsEditing(string columnName, InvoiceItem invoiceItem)
+    {
+        return _invoiceItemConfig.ColumnEditing == columnName && _invoiceItemConfig.ItemToUpdate == invoiceItem; ;
     }
 
     #endregion
