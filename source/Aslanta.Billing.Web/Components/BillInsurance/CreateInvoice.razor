@@ -237,7 +237,6 @@ new ContextMenuItem(){ Text = "Remove", Value = 2, Icon = "remove" }],
     {
         Reset();
 
-        //ordersToUpdate.Add(order);
         _invoiceItemConfig.ItemToUpdate = invoiceItem;
     }
 
@@ -256,6 +255,16 @@ new ContextMenuItem(){ Text = "Remove", Value = 2, Icon = "remove" }],
     {
         _invoiceItemConfig.EditorFocused = false;
         Reset();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (!_invoiceItemConfig.EditorFocused && _invoiceItemConfig.Editor != null)
+        {
+            _invoiceItemConfig.EditorFocused = true;
+        }
     }
 
     #endregion
