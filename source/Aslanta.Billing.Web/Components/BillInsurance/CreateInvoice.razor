@@ -165,7 +165,8 @@
 
     protected override void OnInitialized()
     {
-        var orders = InvoiceState.SelectAllOrders;
+        List<Order> orders = Aslanta.Billing.Web.BillInsurance.Implementations.Mocks.MockOrderFactory.CreateOrders(300);
+        InvoiceState.AddOrders(orders);
     }
 
     #region Orders
